@@ -1,54 +1,37 @@
-# React + TypeScript + Vite
+# 🔁 Swap Currency App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple currency swap form built with **React**, **TypeScript**, and **Vite**, designed to fetch live token data and provide real-time conversion from one currency to another.
 
-Currently, two official plugins are available:
+# Stack
+- ⚡️ [Vite](https://vitejs.dev/) for fast development build
+- ⚛️ [React](https://reactjs.org/)
+- 🟦 [TypeScript](https://www.typescriptlang.org/)
+- 🟢 Node.js v18.8.0
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Run dev: yarn install -> yarn dev
+# Link demo: https://pham-thi-bich-99-tech-git-main-bichiphams-projects.vercel.app/
 
-## Expanding the ESLint configuration
+# ✨ Features
+- Live Token Fetching:
++ Tokens and their prices are loaded from API.
++ If the API fails, the form is not rendered to prevent inaccurate or outdated information.
++ No default data is used due to the constantly changing nature of token prices.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Real-Time Swap Calculation:
++ When the user inputs a number into the From field, the equivalent To amount is automatically calculated using live exchange rates.
++ Support switching from/to currencies
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- User-Friendly Validation:
++ The form only accepts numeric input.
++ Validation is handled gracefully:
++ Non-numeric characters are automatically ignored or blocked.
++ No disruptive or technical error messages are shown to the user.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- Clean UX:
+Avoids exposing raw error messages (e.g., no "network error" or "undefined" in UI).
+Form is only visible when data is fully and correctly loaded.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+❓ Developer Question
+The token API occasionally returns multiple records with the same currency Id. Should the app:
+Filter duplicates, keeping only one entry per currency?
+If yes, should we keep the most recently updated one?
